@@ -9,7 +9,7 @@ passport.use(
     clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK
   },
-  async function(accessToken, refreshToken, profile, cb) {
+  async function(accessToken, refreshToken, profile, done) {
     // a user has logged in via OAuth!
     // refer to the lesson plan from earlier today in order to set this up
 try {
@@ -17,7 +17,7 @@ try {
   if(user) return done(null, user);
 
   user = await UserModel.create({
-    name: profile.displayName,
+    userName: profile.displayName,
     googleId: profile.id
   })
   done(null, user)

@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<section id="show-page">
+  <table>
+    <div>Name:</div>
+    <div><%= bathroom.name %></div>
+    <div>Address:</div>
+    <div><%= bathroom.address %></div>
+    <div>Access Code:</div>
+    <div><%= bathroom.accessCode %></div>
+</table>
+<h2>Reviews</h2>
+<% if (user) { %>
+  <form id="add-review-form" method="POST" action="/bathrooms/<%= bathroom._id %>/reviews">
+    <label>Review:</label>
+    <textarea name="content"></textarea>
+    <input type="submit" value="Add Review">
+  </form>
+  <% } else { %>
+    <span>Login to review</span>
+    <%} %>
+    <% if (user && user._id.equals(r.userId)) { %>
+      <form action="/review/<%= r._id %>?_method=DELETE" method="POST">
+        <button type="submit">X</button>
+        </form>
+        <% } %>
+    </section>
+</body>
+</html>

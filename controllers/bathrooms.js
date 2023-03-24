@@ -1,14 +1,15 @@
 const BathroomModel = require('../models/bathroom');
 
 module.exports = {
-    // new: newBathroom,
+    new: newBathroom,
     create,
-    index
+    index,
+    show
 }
 
-// function newBathroom(req, res) {
-//  res.render('bathrooms/new')
-// }
+function newBathroom(req, res) {
+ res.render('bathrooms/new')
+}
 
 function create(req, res) {
     req.body.createBathroom = !!req.body.createBathroom;
@@ -16,7 +17,7 @@ function create(req, res) {
 
     BathroomModel.create(req.body).then(function(createdBathroomInDb) {
         console.log(createdBathroomInDb)
-        res.redirect(`/bahtrooms/${createdBathroomInDb._id}`);
+        res.redirect(`/bathrooms/${createdBathroomInDb._id}`);
     }).catch((err) => {
         console.log(err);
       res.send('Check the terminal or log the err object')
@@ -31,4 +32,12 @@ function index(req, res) {
         console.log(err);
         res.send(err)
     })
+}
+
+function show(req, res) {
+    BathroomModel.findById(req.params.id).then(function(bathroom){review.find({bathroom: bathroom._id}).then(function(reviews) {
+        console.log(bathroom)
+        res.render('bathrooms/show', {bathroom: bathroom, review: reviews})
+    }) })
+
 }
