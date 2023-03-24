@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<table id="list">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% bathrooms.forEach(function(b) { %>
+      <tr>
+        <td><%= b.name %></td>
+        <td><%= b.address %></td>
+        <td><a href="/bathrooms/<%= b._id %>">Details</a></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
