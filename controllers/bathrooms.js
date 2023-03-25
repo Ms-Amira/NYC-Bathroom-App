@@ -35,9 +35,9 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    BathroomModel.findById(req.params.id).then(function(bathroom){review.find({bathroom: bathroom._id}).then(function(reviews) {
+    BathroomModel.findById(req.params.id).then(function(bathroom) {
         console.log(bathroom)
-        res.render('bathrooms/show', {bathroom: bathroom, review: reviews})
-    }) })
+        res.render('bathrooms/show', {bathroom: bathroom})
+    })
 
 }

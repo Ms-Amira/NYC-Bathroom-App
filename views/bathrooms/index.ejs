@@ -2,8 +2,9 @@
 <table id="list">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
+      <th>Name:</th>
+      <th>Address:</th>
+      <th>Access Code:</th>
       <th></th>
     </tr>
   </thead>
@@ -12,7 +13,8 @@
       <tr>
         <td><%= b.name %></td>
         <td><%= b.address %></td>
-        <!-- <td><a href="/bathrooms/<%= b._id %>">Details</a></td> -->
+        <td><%= b.accessCode %></td>
+        <td><a href="/bathrooms/<%= b._id %>">Details</a></td>
       </tr>
       <% }); %>
     </tbody>
