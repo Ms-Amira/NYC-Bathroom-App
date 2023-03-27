@@ -5,7 +5,7 @@ const reviewSchema = new mongoose.Schema(
     {
      review: String,
      userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-     userName: String   
+     userName: String
     }
 )
 

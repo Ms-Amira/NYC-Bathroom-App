@@ -4,7 +4,8 @@ module.exports = {
     new: newBathroom,
     create,
     index,
-    show
+    show,
+    delete: deleteBathroom
 }
 
 function newBathroom(req, res) {
@@ -35,9 +36,20 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    BathroomModel.findById(req.params.id).then(function(bathroom) {
+    BathroomModel.findById(req.params.id)
+    // .populate('reviews')
+    .then(function(bathroom) {
         console.log(bathroom)
         res.render('bathrooms/show', {bathroom: bathroom})
     })
 
+}
+
+function deleteBathroom(req, res) {
+    BathroomModel.findByIdAndDelete({_id: req.params.id, userId: req.user._id}).then(function(deleteBr) {
+        console.log(deleteBr);
+        return res.redirect('/bathrooms');
+    }).catch(function(err) {
+        console.log(err, '<- delete error');
+    })
 }

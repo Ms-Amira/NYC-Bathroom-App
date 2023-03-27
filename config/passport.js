@@ -18,7 +18,8 @@ try {
 
   user = await UserModel.create({
     userName: profile.displayName,
-    googleId: profile.id
+    googleId: profile.id,
+    email: profile.emails[0].value
   })
   done(null, user)
 

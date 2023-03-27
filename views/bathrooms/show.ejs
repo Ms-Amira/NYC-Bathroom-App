@@ -1,38 +1,43 @@
 <%- include('../partials/header') %>
 <section id="show-page">
   <table>
-    <div>Name:</div>
-    <div><%= bathroom.name %></div>
-    <div>Address:</div>
-    <div><%= bathroom.address %></div>
-    <div>Access Code:</div>
-    <div><%= bathroom.accessCode %></div>
+    <tr>
+    <td>Name:</td>
+    <td><%= bathroom.name %></td>
+    <td>Address:</td>
+    <td><%= bathroom.address %></td>
+    <td>Access Code:</td>
+    <td><%= bathroom.accessCode %></td>
 </table>
+<form action="/bathrooms/<%= bathroom._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete Bathroom</button>
+      </form>
 <h2>Reviews</h2>
 <% if (user) { %>
   <form id="review-form" method="POST" action="/bathrooms/<%= bathroom._id %>/reviews">
     <textarea name="review"></textarea>
     <input type="submit" value="Add Review">
   </form>
-  <!-- <% } else { %>
-    <span>Login to review</span>
+  <% if (bathroom.reviews.length) { %>
+    <table>
+    <% bathroom.reviews.forEach(function(review) { %>
+      <tr>
+        <td class="review-user"><%= review.userName %></td>
+        <td><%= review.review %></td>
+        <td>
+        <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
+          <input name="review" value="<%= review.text %>">
+          <button type="submit">Update Review</button>
+        </form>
+      </td>
+      </tr>
+    <% }); %>
+  </table>
     <% } %>
-<% if (bathroom.reviews.length) { %>
-      <% let total = 0 %>
-      <% bathroom.reviews.forEach(function(b) { %>
-        <tr>
-          <td class="review-user"><%= b.userName %></td>
-          <td><%= b.content %></td>
-          <td>
-            <% if (user && user._id.equals(bathroom.userId)) { %>
-              <form action="/review/<%= bathroom._id %>?_method=DELETE" method="POST">
-                <button type="submit">X</button>
-                </form>
-                <% } %> -->
-          </td>
-        </tr>
-      <% }); %>
+    <% } else { %>
+      <span>Login to review</span>
     </section>
     <% } %>
+
 </body>
 </html>
