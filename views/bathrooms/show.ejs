@@ -25,7 +25,7 @@
         <td class="review-user"><%= review.userName %></td>
         <td><%= review.review %></td>
         <td>
-        <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
+<form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
           <input name="review" value="<%= review.text %>">
           <button type="submit">Update Review</button>
         </form>

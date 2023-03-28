@@ -28,45 +28,28 @@ function create(req, res) {
     })
 }
 
-// function update(req, res, next) {
-//     console.log(req.user, '<-req.user')
-//     console.log(req.params, '<-req.params')
-//     // calling on the review with a specific id to update
-// BathroomModel.findOneAndUpdate({'reviews._id': 
-// // calling on the user that made the review with a specific id
-// req.params.id, 'reviews.userId': req.user._id})
-// // updating the review document with new information
-// .then(function(updateDoc) {
-// // {new:true} returns the updated document
-// req.body, {new:true}
-//  res.redirect(`/bathrooms/${updateDoc._id}`);
-// }).catch(function(err) {
-//     return next(err);
-// })
-// }
 
-
-function update(req, res) {
-    // using the review id to pluck it from the db
-    BathroomModel.findOne({'reviews._id':req.params.
-    id}).then(function(updateDoc) {
-        // accessing the review by it's id and accessing the text propety
-        updateDoc.reviews.id(req.params.id).text = req.body.text;
-        // making sure the user id property matches the id of the logged in user
-        if (!updateDoc.reviews.id(req.params.id).userId.equals(req.user._id))
-        updateDoc.save().then(() => {
-            return res.redirect(`/review/${BathroomModel.id}`);
-        }).catch(function(err) {
-            console.log(err)
-        })
-    })
+async function update(req, res) {
+    const bathroom = await BathroomModel.findOne({'reviews._id': req.params.id});
+    console.log(bathroom, '<- bathroom')
+    const reviewsDoc = bathroom.reviews.id(req.params.id);
+    console.log(reviewsDoc, '<- reviewsDoc')
+    if(!reviewsDoc.userId.equals(req.user._id)) {
+        return res.redirect('/bathrooms')
+    }
+    reviewsDoc.review = req.body.review;
+    console.log(reviewsDoc, '<-reviewsDoc')
+    await bathroom.save();
+    console.log(bathroom, '<-bathrooms new')
+    res.redirect(`/bathrooms/${bathroom._id}`)
 }
 
-
 function edit(req, res) {
-    // retrieving the review within the bathroom model
-    BathroomModel.findOne({'reviews._id': req.params.
-    id}).then(function(editBr) {
-        res.render('reviews/edit', {review:editBr.reviews.id(req.params.id)});
+    const bathroom = BathroomModel.findOne({'reviews._id': req.params.id})
+    const review = bathroom.reviews.id(req.params.id)
+    .then(function() {
+        res.render('bathrooms/show', {review});
+    }).catch(function(err) {
+        console.log(err, '<- error for edit function')
     })
 }
