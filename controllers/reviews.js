@@ -13,9 +13,8 @@ function create(req, res) {
         console.log(brDoc)
         console.log(req.user, '<- req.user')
         // requiring these properties for the review process
-        req.body.username = req.user.name;
+        req.body.userName = req.user.userName;
         req.body.userId = req.user._id;
-        // req.body.email = req.user.email;
 
 //adding req.body to the reviews array and storing it in brDoc
         brDoc.reviews.push(req.body);

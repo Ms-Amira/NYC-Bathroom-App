@@ -3,8 +3,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(https://i.imgur.com/qz0lDaG.jpg);
   background-repeat: no-repeat;
- background-position:top center;
- background-size: 600px;
+  background-position:top center;
+  background-size: 600px;
+  text-align: center;
  
 }
 
@@ -36,6 +37,8 @@ nav > a {
 }
 
 
+
+
 .login {
   display: flex;
   justify-content: center;
@@ -58,6 +61,8 @@ nav > a {
   padding: 5px;
   border-radius: 5px;
 }
+
+
 
 table {
   font-size: 20px;
@@ -83,3 +88,4 @@ table td {
   grid-template-columns: auto auto;
   grid-gap: 1rem;
 }
+

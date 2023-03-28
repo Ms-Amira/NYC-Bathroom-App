@@ -10,11 +10,11 @@ router.get('/', function(req, res) {
   // This could be a landing page, or just redirect to your main resource page which you'll have an a tag that makes 
   // a request to `/auth/google` route below
   // Google OAuth login route
+});
 router.get('/auth/google', passport.authenticate(
   'google',
-  { scope: ['profile', 'email'] }
+  { scope: ['profile'] }
 ));
-});
 
 // Google OAuth callback route
 router.get('/oauth2callback', passport.authenticate(
