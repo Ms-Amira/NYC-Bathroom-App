@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 //Require your User Model here!
-const UserModel = require('../models/bathroom');
+const UserModel = require('../models/user');
 // configuring Passport!
 passport.use(
   new GoogleStrategy({
@@ -19,7 +19,7 @@ try {
   user = await UserModel.create({
     userName: profile.displayName,
     googleId: profile.id,
-    email: profile.emails[0].value
+    // email: profile.emails[0].value 
   })
   done(null, user)
 
