@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
 <section id="show-page">
-  <table>
-    <tr>
-    <td>Name:</td>
-    <td><%= bathroom.name %></td>
-    <td>Address:</td>
-    <td><%= bathroom.address %></td>
-    <td>Access Code:</td>
-    <td><%= bathroom.accessCode %></td>
+    <table id="list">
+    <div>Name:</div>
+    <div><%= bathroom.name %></div>
+    <div>Address:</div>
+    <div><%= bathroom.address %></div>
+    <div>Access Code:</div>
+    <div><%= bathroom.accessCode %></div>
 </table>
+
 <form action="/bathrooms/<%= bathroom._id %>?_method=DELETE" method="POST">
       <button type="submit">Delete Bathroom</button>
       </form>
@@ -16,23 +16,21 @@
 <% if (user) { %>
   <form id="review-form" method="POST" action="/bathrooms/<%= bathroom._id %>/reviews">
     <textarea name="review"></textarea>
-    <input type="submit" value="Add Review">
+    <input id="reviewbtn" type="submit" value="Add Review">
   </form>
   <% if (bathroom.reviews.length) { %>
-    <table>
     <% bathroom.reviews.forEach(function(review) { %>
-      <tr>
-        <td class="review-user"><%= review.userName %></td>
-        <td><%= review.review %></td>
-        <td>
+      <div>
+        <div class="review-user"><%= review.userName %></div>
+        <div><%= review.review %></div>
+        <div>
 <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
           <input name="review" value="<%= review.text %>">
           <button type="submit">Update Review</button>
         </form>
-      </td>
-      </tr>
+      </div>
+      </div>
     <% }); %>
-  </table>
     <% } %>
     <% } else { %>
       <span>Login to review</span>

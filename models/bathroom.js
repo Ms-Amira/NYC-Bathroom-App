@@ -12,8 +12,8 @@ const reviewSchema = new mongoose.Schema(
 
 const bathroomSchema = new mongoose.Schema(
     {
-name: String,
-address: String,
+name: { type: String, required: true},
+address: { type: String, required: true},
 accessCode: Number,
 reviews: [reviewSchema],
     },
