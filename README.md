@@ -6,8 +6,14 @@ The city never sleeps so why should bathrooms? This app lets you add and find ba
 
 ## Screenshots
 ![Alt text](https://i.imgur.com/GzVQYcg.png)
+
+
 ![Alt text](https://i.imgur.com/xSxBIKE.png)
+
+
 ![Alt text](https://i.imgur.com/GTuhC1U.png)
+
+
 ![Alt text](https://i.imgur.com/HDwJtYy.png)
 
 ## Technologies Used
