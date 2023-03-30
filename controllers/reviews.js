@@ -52,3 +52,23 @@ function edit(req, res) {
         console.log(err, '<- error for edit function')
     })
 }
+
+
+//   function update(req, res) {
+//     BathroomModel.findOne ({'reviews._id': req.params.id})
+//     .then(function(bathroom) {
+//         console.log(bathroom, '<- bathroom')
+//        bathroom.reviews.id(req.params.id);
+//         if(!reviewsDoc.userId.equals(req.user._id)) {
+//             return res.redirect('/bathrooms')
+//         }
+//     })
+//     reviewsDoc.review = req.body.review;
+//     console.log(reviewsDoc, '<-reviewsDoc')
+//     .then(function() {
+//         bathroom.save();
+//         console.log(bathroom, '<-bathrooms new')
+//         res.redirect(`/bathrooms/${bathroom._id}`)
+
+//     }) 
+// }
