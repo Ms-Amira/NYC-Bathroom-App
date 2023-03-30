@@ -8,26 +8,27 @@
     <div>Access Code:</div>
     <div><%= bathroom.accessCode %></div>
 </table>
-
-<form action="/bathrooms/<%= bathroom._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete Bathroom</button>
-      </form>
-<h2>Reviews</h2>
-<% if (user) { %>
-  <form id="review-form" method="POST" action="/bathrooms/<%= bathroom._id %>/reviews">
-    <textarea name="review"></textarea>
-    <input id="reviewbtn" type="submit" value="Add Review">
+<div id="reviewsform">
+  <form class="deletebtn" action="/bathrooms/<%= bathroom._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete Bathroom</button>
   </form>
-  <% if (bathroom.reviews.length) { %>
-    <% bathroom.reviews.forEach(function(review) { %>
-      <div>
-        <div class="review-user"><%= review.userName %></div>
-        <div><%= review.review %></div>
-        <div>
-<form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
-          <input name="review" value="<%= review.text %>">
-          <button type="submit">Update Review</button>
-        </form>
+  <h2>Reviews</h2>
+  <% if (user) { %>
+    <form id="review-form" method="POST" action="/bathrooms/<%= bathroom._id %>/reviews">
+      <textarea name="review"></textarea>
+      <input id="reviewbtn" type="submit" value="Add Review">
+    </form>
+  </div>
+    <% if (bathroom.reviews.length) { %>
+      <% bathroom.reviews.forEach(function(review) { %>
+        <div class="updatereview">
+          <div class="review-user"><%= review.userName %></div>
+          <div><%= review.review %></div>
+          <div>
+            <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
+              <input name="review" value="<%= review.text %>">
+              <button type="submit">Update Review</button>
+            </form>
       </div>
       </div>
     <% }); %>
