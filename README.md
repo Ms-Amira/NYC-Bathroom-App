@@ -17,7 +17,7 @@ The city never sleeps so why should bathrooms? This app lets you add and find ba
 ![Alt text](https://i.imgur.com/HDwJtYy.png)
 
 ## Technologies Used
-Node.js, Mongoose, Monogo, CSS, HTML
+Node, Express, MonogoDB, CSS, HTML
 
 
 ## App Link
