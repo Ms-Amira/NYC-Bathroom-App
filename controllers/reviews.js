@@ -3,8 +3,27 @@ const BathroomModel = require('../models/bathroom');
 module.exports = {
     create,
     update,
-    edit
 }
+
+
+
+function update(req, res) {
+    BathroomModel.findOne({'reviews._id': req.params.id})
+    .then(function(bathroom) {
+        const reviewsDoc = bathroom.reviews.id(req.params.id)
+        console.log(reviewsDoc, '<- reviewsDoc')
+        if(!reviewsDoc.userId.equals(req.user._id)) {
+            return res.redirect('/bathrooms')
+        }
+        reviewsDoc.review = req.body.review;
+        console.log(reviewsDoc, '<-reviewsDoc')
+          bathroom.save()
+        .then(function() {
+            res.redirect(`/bathrooms/${bathroom._id}`)
+        })
+    })
+  }
+
 
 function create(req, res) {
     console.log(req.body, '<- req.body')
@@ -24,31 +43,5 @@ function create(req, res) {
     }).catch(err => {
         console.log(err, '<- review creation error');
         res.send(err)
-    })
-}
-
-
-async function update(req, res) {
-    const bathroom = await BathroomModel.findOne({'reviews._id': req.params.id});
-    console.log(bathroom, '<- bathroom')
-    const reviewsDoc = bathroom.reviews.id(req.params.id);
-    console.log(reviewsDoc, '<- reviewsDoc')
-    if(!reviewsDoc.userId.equals(req.user._id)) {
-        return res.redirect('/bathrooms')
-    }
-    reviewsDoc.review = req.body.review;
-    console.log(reviewsDoc, '<-reviewsDoc')
-    await bathroom.save();
-    console.log(bathroom, '<-bathrooms new')
-    res.redirect(`/bathrooms/${bathroom._id}`)
-}
-
-function edit(req, res) {
-    const bathroom = BathroomModel.findOne({'reviews._id': req.params.id})
-    const review = bathroom.reviews.id(req.params.id)
-    .then(function() {
-        res.render('bathrooms/show', {review});
-    }).catch(function(err) {
-        console.log(err, '<- error for edit function')
     })
 }

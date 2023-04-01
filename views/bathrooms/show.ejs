@@ -24,12 +24,14 @@
         <div class="updatereview">
           <div class="review-user"><%= review.userName %></div>
           <div><%= review.review %></div>
-          <div>
+          <% console.log(review, '<-review not working') %>
+            <% console.log(user, '<-user not showing') %> 
+<% if (review.userId.equals(user._id)) { %>
             <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
               <input name="review" value="<%= review.text %>">
               <button type="submit">Update Review</button>
             </form>
-      </div>
+          <% } %>
       </div>
     <% }); %>
     <% } %>
